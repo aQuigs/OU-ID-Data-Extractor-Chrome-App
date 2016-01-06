@@ -11,8 +11,8 @@
 <body>
 
 <div id="ui-main" class="container">
-	<h1 class="header">Event Tracking System</h1>
-	<div style="float:left">
+	<h1 id="header">Event Tracking System</h1>
+	<div style="float: left; margin-bottom: 5px;">
 		<input class="btn btn-info" id="tracker-button" style="margin-right: 10px; padding: 15px;" type="button" value="Tracker">
 		<input class="btn btn-warning" id="event-button" style="margin-right: 10px; padding: 15px;" type="button" value="Event Manager">
 		<input class="btn btn-danger" id="staff-button" style="margin-right: 10px; padding: 15px;" type="button" value="Staff Manager">
@@ -21,7 +21,6 @@
 
 
 <div id="ui-staff" class="container">
-	<h1 class="header">Staff Manager</h1>
 	<div style="margin: 10px 0;">
 		<input type="text" placeholder="Staff Name" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
 		<input type="button" class="btn btn-default" value="Add Staff Member">
@@ -37,7 +36,6 @@
 
 <!-- I hate this redundancy...but chrome apps won't let you use multiple pages -->
 <div id="ui-event" class="container">
-	<h1 class="header">Event Manager</h1>
 	<div style="margin: 10px 0;">
 		<input type="text" placeholder="Event Name" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
 		<input type="button" class="btn btn-default" value="Add Event">
@@ -52,7 +50,6 @@
 
 
 <div id="ui-tracker" class="container">
-	<h1 class="header">Event Tracker</h1>
 	<table>
 		<tr>
 			<td class="tracker-cell tracker-col1">Grizzly ID</td>
@@ -90,11 +87,6 @@
 			
 		</tr>
 	</table>
-
-	
-</div>
-<div class="container">
-	<input id="back-button" type="button" class="btn btn-default" value="Back">
 </div>
 </body>
 </html>

@@ -1,27 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('back-button').addEventListener('click', function() {
-		$('#back-button').hide();
+
+    document.getElementById('tracker-button').addEventListener('click', function() {
 		$('#ui-staff').hide();
 		$('#ui-event').hide();
-		$('#ui-tracker').hide();
-		$('#ui-main').show();
-    });
-    
-    document.getElementById('tracker-button').addEventListener('click', function() {
-		$('#ui-main').hide();
+		$('#header').text("Event Tracker");
 		$('#ui-tracker').show();
-		$('#back-button').show();
     });
     
     document.getElementById('staff-button').addEventListener('click', function() {
-		$('#ui-main').hide();
+		$('#ui-event').hide();
+		$('#ui-tracker').hide();
+		$('#header').text("Staff Manager");
 		$('#ui-staff').show();
-		$('#back-button').show();
     });
     
     document.getElementById('event-button').addEventListener('click', function() {
-		$('#ui-main').hide();
+		$('#ui-staff').hide();
+		$('#ui-tracker').hide();
+		$('#header').text("Event Manager");
 		$('#ui-event').show();
-		$('#back-button').show();
     });
 });
