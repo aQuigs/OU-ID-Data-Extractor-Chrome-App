@@ -1,0 +1,14 @@
+{
+  "name": "OU Event Tracker",
+  "description": "Used to track attendees at OU events from their university ID card swipes",
+  "version": "0.1",
+  "manifest_version": 2,
+  // "icons": { "16": "calculator-16.png", "128": "calculator-128.png" },
+  "permissions": [
+        ],
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  }
+}

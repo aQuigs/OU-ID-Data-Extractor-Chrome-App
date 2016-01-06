@@ -1,0 +1,39 @@
+.container {
+	margin: 10px;
+}
+
+.header {
+	padding-bottom: 5px;
+}
+
+.tracker-row {
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+
+.tracker-col1 {
+	width: 100px;
+}
+
+.tracker-col2 {
+	min-width: 250px;
+}
+
+.tracker-cell {
+	padding-bottom: 10px;
+	padding-right: 10px;
+}
+
+.tracker-error {
+	color: red;
+	font-size: 16px;
+	visibility: hidden;
+}
+
+.data-table  th {
+	min-width: 100px;
+}
+
+#ui-event, #ui-staff, #ui-tracker, #back-button {
+	display: none;
+}
