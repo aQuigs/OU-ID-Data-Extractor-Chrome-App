@@ -6,10 +6,14 @@ function getDateFormatted() {
 document.addEventListener('DOMContentLoaded', function() {
 
 	var dt;
+
     $('#tracker-button').on('click', function() {
 		$('#ui-staff').hide();
 		$('#ui-event').hide();
 		$('#header').text("Event Tracker");
+		$('#event-name').val('');
+		$('#staff-name').val('');
+		$('#gnumber').val('');
 		$('#ui-tracker').show();
 
 		// fix to accomodate for lack of resizing table headers when display: none;
@@ -22,6 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		$('#ui-event').hide();
 		$('#ui-tracker').hide();
 		$('#header').text("Staff Manager");
+		$('#staff-manager-list').val('');
+		$('#new-staff').val('');
 		$('#ui-staff').show();
     });
     
@@ -29,6 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		$('#ui-staff').hide();
 		$('#ui-tracker').hide();
 		$('#header').text("Event Manager");
+		$('#event-manager-list').val('');
+		$('#new-event').val('');
 		$('#ui-event').show();
     });
 
@@ -81,7 +89,9 @@ document.addEventListener('DOMContentLoaded', function() {
     $('#add-event-btn').on('click', function() {
     	var eventName = $('#new-event').val();
     	if (eventName) {
-    		$('#event-manager-list').append('<option value="'+eventName+'">'+eventName+'</option>')
+    		var newElement = '<option value="'+eventName+'">'+eventName+'</option>';
+    		$('#event-manager-list').append(newElement);
+    		$('#event-name').append(newElement);
     		$('#new-event').val('');
     	}
     });
@@ -89,8 +99,30 @@ document.addEventListener('DOMContentLoaded', function() {
     $('#add-staff-btn').on('click', function() {
     	var staffName = $('#new-staff').val();
     	if (staffName) {
-    		$('#staff-manager-list').append('<option value="'+staffName+'">'+staffName+'</option>')
+    		var newElement = '<option value="'+staffName+'">'+staffName+'</option>';
+    		$('#staff-manager-list').append(newElement);
+    		$('#staff-name').append(newElement);
     		$('#new-staff').val('');
+    	}
+    });
+
+    $('#delete-staff-btn').on('click', function() {
+    	var selector = $("#staff-manager-list");
+    	if (selector.val()) {
+    		var toremove = selector.find(":selected");
+    		$('#staff-name').children("[value='"+toremove.val()+"']").remove();
+    		toremove.remove();
+    		selector.val('');
+    	}
+    });
+
+    $('#delete-event-btn').on('click', function() {
+    	var selector = $("#event-manager-list");
+    	if (selector.val()) {
+    		var toremove = selector.find(":selected");
+    		$('#staff-name').children("[value='"+toremove.val()+"']").remove();
+    		toremove.remove();
+    		selector.val('');
     	}
     });
 });
