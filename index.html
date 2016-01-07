@@ -11,83 +11,83 @@
 <body>
 
 <div id="ui-main" class="container">
-	<h1 id="header">Event Tracking System</h1>
-	<div style="float: left; margin-bottom: 5px;">
-		<input class="btn btn-info" id="tracker-button" style="margin-right: 10px; padding: 15px;" type="button" value="Tracker">
-		<input class="btn btn-warning" id="event-button" style="margin-right: 10px; padding: 15px;" type="button" value="Event Manager">
-		<input class="btn btn-danger" id="staff-button" style="margin-right: 10px; padding: 15px;" type="button" value="Staff Manager">
-	</div>
+    <h1 id="header">Event Tracking System</h1>
+    <div style="float: left; margin-bottom: 5px;">
+        <input class="btn btn-info" id="tracker-button" style="margin-right: 10px; padding: 15px;" type="button" value="Tracker">
+        <input class="btn btn-warning" id="event-button" style="margin-right: 10px; padding: 15px;" type="button" value="Event Manager">
+        <input class="btn btn-danger" id="staff-button" style="margin-right: 10px; padding: 15px;" type="button" value="Staff Manager">
+    </div>
 </div>
 
 
 <div id="ui-staff" class="container">
-	<div style="margin: 10px 0;">
-		<input id="new-staff" type="text" placeholder="Staff Name" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
-		<input type="button" id="add-staff-btn" class="btn btn-default" value="Add Staff Member">
-	</div>
-	<div style="margin: 10px 0;">
-		<select id="staff-manager-list" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
-			<option value="" disabled selected hidden>Select a Staff Member</option>
-		</select>
-		<input type="button" id="delete-staff-btn" class="btn btn-danger" value="Delete Staff Member">
-	</div>
+    <div style="margin: 10px 0;">
+        <input id="new-staff" type="text" placeholder="Staff Name" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
+        <input type="button" id="add-staff-btn" class="btn btn-default" value="Add Staff Member">
+    </div>
+    <div style="margin: 10px 0;">
+        <select id="staff-manager-list" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
+            <option value="" disabled selected hidden>Select a Staff Member</option>
+        </select>
+        <input type="button" id="delete-staff-btn" class="btn btn-danger" value="Delete Staff Member">
+    </div>
 </div>
 
 
 <!-- Not a fan of this redundancy...but whatever -->
 <div id="ui-event" class="container">
-	<div style="margin: 10px 0;">
-		<input id="new-event" type="text" placeholder="Event Name" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
-		<input type="button" class="btn btn-default" id="add-event-btn" value="Add Event">
-	</div>
-	<div style="margin: 10px 0;">
-		<select id="event-manager-list" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
-			<option value="" disabled selected hidden>Select an Event</option>
-		</select>
-		<input type="button" id="delete-event-btn" class="btn btn-danger" value="Delete Event">
-	</div>
+    <div style="margin: 10px 0;">
+        <input id="new-event" type="text" placeholder="Event Name" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
+        <input type="button" class="btn btn-default" id="add-event-btn" value="Add Event">
+    </div>
+    <div style="margin: 10px 0;">
+        <select id="event-manager-list" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
+            <option value="" disabled selected hidden>Select an Event</option>
+        </select>
+        <input type="button" id="delete-event-btn" class="btn btn-danger" value="Delete Event">
+    </div>
 </div>
 
 
 <div id="ui-tracker" class="container">
-	<table>
-		<tr>
-			<td class="tracker-cell tracker-col1">Grizzly ID</td>
-			<td class="tracker-cell"><input type="text" id="gnumber" placeholder="G########" class="form-control tracker-col2"></td>
-			<td class="tracker-cell"><input type="button" id="add-record-btn" class="btn btn-default" value="Add Record" ></td>
-		</tr>
-		<tr>
-			<td class="tracker-cell tracker-col1">Event Name</td>
-			<td class="tracker-cell">
-				<select id="event-name" class="form-control tracker-col2">
-					<option value="" disabled selected hidden>Select an Event</option>
-				</select>
-			</td>
-			<td class="tracker-cell tracker-error" id="event-error"><strong>Enter an event name</strong></td>
-		</tr>
-		<tr>
-			<td class="tracker-cell tracker-col1">Staff Name</td>
-			<td class="tracker-cell">
-				<select id="staff-name" class="form-control tracker-col2">
-					<option value="" disabled selected hidden>Select a Staff Member</option>
-				</select>
-			</td>
-			<td class="tracker-cell tracker-error" id="staff-error"><strong>Enter a staff name</strong></td>
-		</tr>
-	</table>
-	
-	<table id="data-table" class="display">
-		<thead>
-			<tr>
-				<th style="width: 30px; min-width: 0;">G#</th>
-				<th>Time</th>
-				<th>Event Name</th>
-				<th>Staff Name</th>
-			</tr>
-		</thead>
-		<tbody>
+    <table>
+        <tr>
+            <td class="tracker-cell tracker-col1">Grizzly ID</td>
+            <td class="tracker-cell"><input type="text" id="gnumber" placeholder="G########" class="form-control tracker-col2"></td>
+            <td class="tracker-cell"><input type="button" id="add-record-btn" class="btn btn-default" value="Add Record" ></td>
+        </tr>
+        <tr>
+            <td class="tracker-cell tracker-col1">Event Name</td>
+            <td class="tracker-cell">
+                <select id="event-name" class="form-control tracker-col2">
+                    <option value="" disabled selected hidden>Select an Event</option>
+                </select>
+            </td>
+            <td class="tracker-cell tracker-error" id="event-error"><strong>Enter an event name</strong></td>
+        </tr>
+        <tr>
+            <td class="tracker-cell tracker-col1">Staff Name</td>
+            <td class="tracker-cell">
+                <select id="staff-name" class="form-control tracker-col2">
+                    <option value="" disabled selected hidden>Select a Staff Member</option>
+                </select>
+            </td>
+            <td class="tracker-cell tracker-error" id="staff-error"><strong>Enter a staff name</strong></td>
+        </tr>
+    </table>
+    
+    <table id="data-table" class="display">
+        <thead>
+            <tr>
+                <th style="width: 30px; min-width: 0;">G#</th>
+                <th>Time</th>
+                <th>Event Name</th>
+                <th>Staff Name</th>
+            </tr>
+        </thead>
+        <tbody>
         </tbody>
-	</table>
+    </table>
 </div>
 </body>
 </html>
