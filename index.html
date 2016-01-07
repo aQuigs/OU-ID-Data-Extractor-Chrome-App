@@ -34,7 +34,7 @@
 </div>
 
 
-<!-- I hate this redundancy...but chrome apps won't let you use multiple pages -->
+<!-- Not a fan of this redundancy...but whatever -->
 <div id="ui-event" class="container">
 	<div style="margin: 10px 0;">
 		<input type="text" placeholder="Event Name" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
@@ -53,8 +53,8 @@
 	<table>
 		<tr>
 			<td class="tracker-cell tracker-col1">Grizzly ID</td>
-			<td class="tracker-cell"><input type="text" placeholder="G########" class="form-control tracker-col2"></td>
-			<td class="tracker-cell"><input type="button" class="btn btn-default" value="Add Record" ></td>
+			<td class="tracker-cell"><input type="text" id="gnumber" placeholder="G########" class="form-control tracker-col2"></td>
+			<td class="tracker-cell"><input type="button" id="add-record-btn" class="btn btn-default" value="Add Record" ></td>
 		</tr>
 		<tr>
 			<td class="tracker-cell tracker-col1">Event Name</td>
@@ -63,7 +63,7 @@
 					<option value="" disabled selected hidden>Select an Event</option>
 				</select>
 			</td>
-			<td class="tracker-cell tracker-error"><strong>Enter a staff name</strong></td>
+			<td class="tracker-cell tracker-error" id="event-error"><strong>Enter an event name</strong></td>
 		</tr>
 		<tr>
 			<td class="tracker-cell tracker-col1">Staff Name</td>
@@ -72,20 +72,21 @@
 					<option value="" disabled selected hidden>Select a Staff Member</option>
 				</select>
 			</td>
-			<td class="tracker-cell tracker-error"><strong>Enter an event name</strong></td>
+			<td class="tracker-cell tracker-error" id="staff-error"><strong>Enter a staff name</strong></td>
 		</tr>
 	</table>
 	
-	<table class="data-table">
-		<tr>
-			<th style="width: 30px; min-width: 0;">G#</th>
-			<th>Time</th>
-			<th>Event Name</th>
-			<th>Staff Name</th>
-		</tr>
-		<tr>
-			
-		</tr>
+	<table id="data-table" class="display">
+		<thead>
+			<tr>
+				<th style="width: 30px; min-width: 0;">G#</th>
+				<th>Time</th>
+				<th>Event Name</th>
+				<th>Staff Name</th>
+			</tr>
+		</thead>
+		<tbody>
+        </tbody>
 	</table>
 </div>
 </body>
