@@ -22,11 +22,11 @@
 
 <div id="ui-staff" class="container">
 	<div style="margin: 10px 0;">
-		<input type="text" placeholder="Staff Name" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
-		<input type="button" class="btn btn-default" value="Add Staff Member">
+		<input id="new-staff" type="text" placeholder="Staff Name" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
+		<input type="button" id="add-staff-btn" class="btn btn-default" value="Add Staff Member">
 	</div>
 	<div style="margin: 10px 0;">
-		<select class="form-control" style="float: left; width: 250px; margin-right: 10px;">
+		<select id="staff-manager-list" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
 			<option value="" disabled selected hidden>Select a Staff Member</option>
 		</select>
 		<input type="button" class="btn btn-danger" value="Delete Staff Member">
@@ -37,11 +37,11 @@
 <!-- Not a fan of this redundancy...but whatever -->
 <div id="ui-event" class="container">
 	<div style="margin: 10px 0;">
-		<input type="text" placeholder="Event Name" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
-		<input type="button" class="btn btn-default" value="Add Event">
+		<input id="new-event" type="text" placeholder="Event Name" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
+		<input type="button" class="btn btn-default" id="add-event-btn" value="Add Event">
 	</div>
 	<div style="margin: 10px 0;">
-		<select class="form-control" style="float: left; width: 250px; margin-right: 10px;">
+		<select id="event-manager-list" class="form-control" style="float: left; width: 250px; margin-right: 10px;">
 			<option value="" disabled selected hidden>Select an Event</option>
 		</select>
 		<input type="button" class="btn btn-danger" value="Delete Event">

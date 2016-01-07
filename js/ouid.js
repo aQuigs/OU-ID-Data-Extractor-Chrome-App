@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
     });
     
-    $('staff-button').on('click', function() {
+    $('#staff-button').on('click', function() {
 		$('#ui-event').hide();
 		$('#ui-tracker').hide();
 		$('#header').text("Staff Manager");
@@ -65,8 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
     				eventName,
     				staffName
 				]).draw(false);
-
-
     			$('#gnumber').val('');
     		} else {
     			if (!eventName) {
@@ -77,6 +75,22 @@ document.addEventListener('DOMContentLoaded', function() {
     				$('#staff-error').css('visibility', 'visible');
     			}
     		}
+    	}
+    });
+
+    $('#add-event-btn').on('click', function() {
+    	var eventName = $('#new-event').val();
+    	if (eventName) {
+    		$('#event-manager-list').append('<option value="'+eventName+'">'+eventName+'</option>')
+    		$('#new-event').val('');
+    	}
+    });
+
+    $('#add-staff-btn').on('click', function() {
+    	var staffName = $('#new-staff').val();
+    	if (staffName) {
+    		$('#staff-manager-list').append('<option value="'+staffName+'">'+staffName+'</option>')
+    		$('#new-staff').val('');
     	}
     });
 });
