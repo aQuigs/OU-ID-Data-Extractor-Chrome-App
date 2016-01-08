@@ -3,9 +3,27 @@ var usedEvents = {};
 var usedStaff = {};
 var usedRecordsByGID = {};
 
+function adjustColumnSize() {
+    if (dt) {
+        dt.columns.adjust();
+    }
+}
+
 function getDateFormatted() {
     var date = new Date();
-    return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    month   = month   < 10 ? '0'+month : month;
+    day     = day     < 10 ? '0'+day : day;
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    seconds = seconds < 10 ? '0'+seconds : seconds;
+    return month + "/" + day + "/" + date.getFullYear() + " " +  hours+ ":" + minutes+ ":" + seconds + " " + ampm;
 }
 
 function addRecord() {
@@ -29,6 +47,7 @@ function addRecord() {
                 }
             }
             $('#gnumber').val('');
+            $('#gnumber').focus();
         } else {
             if (!eventName) {
                 $('#event-error').css('visibility', 'visible');
@@ -86,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
     $('#add-event-btn').on('click', addEvent);
     $('#add-staff-btn').on('click', addStaff);
 
-
     $('#tracker-button').on('click', function() {
         $('#ui-staff').hide();
         $('#ui-event').hide();
@@ -99,9 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#ui-tracker').show();
 
         // fix to accomodate for lack of resizing table headers when display: none;
-        if (dt) {
-            dt.columns.adjust();
-        }
+        adjustColumnSize();
     });
     
     $('#staff-button').on('click', function() {
@@ -127,12 +143,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if ($('#event-name').val()) {
             $('#event-error').css('visibility', 'hidden');
         }
+        $('#gnumber').focus();
     });
 
     $('#staff-name').on('change', function() {
         if ($('#staff-name').val()) {
             $('#staff-error').css('visibility', 'hidden');
         }
+        $('#gnumber').focus();
     });
 
     dt = $('#data-table').DataTable({
