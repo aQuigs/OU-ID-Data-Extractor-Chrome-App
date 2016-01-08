@@ -1,4 +1,7 @@
 var dt;
+var usedEvents = {};
+var usedStaff = {};
+var usedRecordsByGID = {};
 
 function getDateFormatted() {
     var date = new Date();
@@ -12,12 +15,19 @@ function addRecord() {
         var staffName = $('#staff-name').val();
 
         if (gnum && eventName && staffName) {
-            dt.row.add([
-                gnum,
-                getDateFormatted(),
-                eventName,
-                staffName
-            ]).draw(false);
+            if (!usedRecordsByGID[gnum] || usedRecordsByGID[gnum].indexOf(eventName) == -1) {
+                dt.row.add([
+                    gnum,
+                    getDateFormatted(),
+                    eventName,
+                    staffName
+                ]).draw(false);
+                if (usedRecordsByGID[gnum]) {
+                    usedRecordsByGID[gnum].push(eventName);
+                } else {
+                    usedRecordsByGID[gnum] = [eventName];
+                }
+            }
             $('#gnumber').val('');
         } else {
             if (!eventName) {
@@ -34,9 +44,12 @@ function addRecord() {
 function addEvent() {
     var eventName = $('#new-event').val();
     if (eventName) {
-        var newElement = '<option value="'+eventName+'">'+eventName+'</option>';
-        $('#event-manager-list').append(newElement);
-        $('#event-name').append(newElement);
+        if (!usedEvents[eventName]) {
+            var newElement = '<option value="'+eventName+'">'+eventName+'</option>';
+            $('#event-manager-list').append(newElement);
+            $('#event-name').append(newElement);
+            usedEvents[eventName] = true;
+        }
         $('#new-event').val('');
         $('#event-manager-list').val(eventName);
     }
@@ -45,9 +58,12 @@ function addEvent() {
 function addStaff() {
     var staffName = $('#new-staff').val();
     if (staffName) {
-        var newElement = '<option value="'+staffName+'">'+staffName+'</option>';
-        $('#staff-manager-list').append(newElement);
-        $('#staff-name').append(newElement);
+        if (!usedStaff[staffName]) {
+            var newElement = '<option value="'+staffName+'">'+staffName+'</option>';
+            $('#staff-manager-list').append(newElement);
+            $('#staff-name').append(newElement);
+            usedStaff[staffName] = true;
+        }
         $('#new-staff').val('');
         $('#staff-manager-list').val(staffName);
     }
@@ -66,6 +82,10 @@ document.addEventListener('DOMContentLoaded', function() {
     onEnter('#gnumber', addRecord);
     onEnter('#new-event', addEvent);
     onEnter('#new-staff', addStaff);
+    $('#add-record-btn').on('click', addRecord);
+    $('#add-event-btn').on('click', addEvent);
+    $('#add-staff-btn').on('click', addStaff);
+
 
     $('#tracker-button').on('click', function() {
         $('#ui-staff').hide();
@@ -121,16 +141,11 @@ document.addEventListener('DOMContentLoaded', function() {
         "paging":         false
     });
 
-    $('#add-record-btn').on('click', addRecord);
-
-    $('#add-event-btn').on('click', addEvent);
-
-    $('#add-staff-btn').on('click', addStaff);
-
     $('#delete-staff-btn').on('click', function() {
         var selector = $("#staff-manager-list");
         if (selector.val()) {
             var toremove = selector.find(":selected");
+            delete usedStaff[toremove.val()];
             $('#staff-name').children("[value='"+toremove.val()+"']").remove();
             toremove.remove();
             selector.val('');
@@ -141,7 +156,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var selector = $("#event-manager-list");
         if (selector.val()) {
             var toremove = selector.find(":selected");
-            $('#staff-name').children("[value='"+toremove.val()+"']").remove();
+            delete usedEvents[toremove.val()];
+            $('#event-name').children("[value='"+toremove.val()+"']").remove();
             toremove.remove();
             selector.val('');
         }
