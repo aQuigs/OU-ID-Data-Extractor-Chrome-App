@@ -37,5 +37,13 @@ function saveSwipes() {
 document.addEventListener('DOMContentLoaded', function() {
     cd(function() {
         cd().mkdir(DIRNAME);
+
+        cd('/ouid').read(STAFF_CSV, function(done, fileContent) {
+            fileContent.split('\n').forEach(addStaffByName);
+        }, function(){})
+
+        cd('/ouid').read(EVENT_CSV, function(done, fileContent) {
+            fileContent.split('\n').forEach(addEventByName);
+        }, function(){});
     });
 });
