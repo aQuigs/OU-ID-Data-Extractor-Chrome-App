@@ -30,7 +30,7 @@
 }
 
 .data-table  th {
-    min-width: 100px;
+    width: 100%;
 }
 
 #ui-event, #ui-staff, #ui-tracker, #back-button {

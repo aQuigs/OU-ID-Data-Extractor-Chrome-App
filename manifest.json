@@ -5,12 +5,13 @@
   "manifest_version": 2,
   // "icons": { "16": "calculator-16.png", "128": "calculator-128.png" },
   "permissions": [
+     {"fileSystem": ["write"]},
     "unlimitedStorage",
     "storage"
   ],
   "app": {
     "background": {
-      "scripts": ["background.js"]
+      "scripts": ["js/background.js"]
     }
   }
 }

@@ -39,6 +39,7 @@ function addRecordByData(gnum, date, eventName, staffName) {
     } else {
         usedRecordsByGID[gnum] = [eventName];
     }
+    adjustColumnSize();
 }
 
 function addRecord() {
@@ -170,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     dt = $('#data-table').DataTable({
-        "scrollY":        "300px",
+        "scrollY":        "200px",
         "scrollCollapse": true,
         "paging":         false
     });
