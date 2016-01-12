@@ -1,4 +1,5 @@
 var dt;
+// for duplicate-avoiding purposes and saving without jquery HTML parsing
 var usedEvents = [];
 var usedStaff = [];
 var usedRecordsByGID = {};
@@ -166,7 +167,9 @@ document.addEventListener('DOMContentLoaded', function() {
         var selector = $("#staff-manager-list");
         if (selector.val()) {
             var toremove = selector.find(":selected");
-            delete usedStaff[toremove.val()];
+            // Remove from usedStaff array
+            usedStaff.splice(usedStaff.indexOf(toremove.val(), 1));
+            saveStaffNames(usedStaff);
             $('#staff-name').children("[value='"+toremove.val()+"']").remove();
             toremove.remove();
             selector.val('');
@@ -177,7 +180,9 @@ document.addEventListener('DOMContentLoaded', function() {
         var selector = $("#event-manager-list");
         if (selector.val()) {
             var toremove = selector.find(":selected");
-            delete usedEvents[toremove.val()];
+            // Remove from usedEvents array
+            usedEvents.splice(usedEvents.indexOf(toremove.val(), 1));
+            saveEventNames(usedEvents);
             $('#event-name').children("[value='"+toremove.val()+"']").remove();
             toremove.remove();
             selector.val('');

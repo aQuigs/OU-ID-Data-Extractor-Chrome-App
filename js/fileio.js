@@ -4,7 +4,11 @@ var EVENT_CSV = 'eventNames.csv'
 var SWIPES_CSV = 'swipeData.csv'
 
 function saveList(filename, data) {
-    cd(DIRNAME).rmrf(filename).write(filename, data.join('\n'));
+    if (data) {
+        cd(DIRNAME).rmrf(filename).write(filename, data.join('\n'));
+    } else {
+        cd(DIRNAME).rmrf(filename);
+    }
 }
 
 function saveStaffNames(data) {
@@ -23,7 +27,11 @@ function saveSwipes() {
             return $(this).text()
         }).get().join(',')
     }).get().join('\n');
-    cd(DIRNAME).rmrf(SWIPES_CSV).write(SWIPES_CSV, csvData);
+    if (csvData) {
+        cd(DIRNAME).rmrf(SWIPES_CSV).write(SWIPES_CSV, csvData);
+    } else {
+        cd(DIRNAME).rmrf(SWIPES_CSV);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
