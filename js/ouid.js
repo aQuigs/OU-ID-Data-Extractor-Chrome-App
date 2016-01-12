@@ -45,6 +45,7 @@ function addRecord() {
                 } else {
                     usedRecordsByGID[gnum] = [eventName];
                 }
+                saveSwipes();
             }
             $('#gnumber').val('');
             $('#gnumber').focus();
