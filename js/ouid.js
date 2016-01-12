@@ -1,6 +1,6 @@
 var dt;
-var usedEvents = {};
-var usedStaff = {};
+var usedEvents = [];
+var usedStaff = [];
 var usedRecordsByGID = {};
 
 function adjustColumnSize() {
@@ -63,11 +63,12 @@ function addRecord() {
 function addEvent() {
     var eventName = $('#new-event').val();
     if (eventName) {
-        if (!usedEvents[eventName]) {
+        if (usedEvents.indexOf(eventName) == -1) {
             var newElement = '<option value="'+eventName+'">'+eventName+'</option>';
             $('#event-manager-list').append(newElement);
             $('#event-name').append(newElement);
-            usedEvents[eventName] = true;
+            usedEvents.push(eventName);
+            saveEventNames(usedEvents);
         }
         $('#new-event').val('');
         $('#event-manager-list').val(eventName);
@@ -77,11 +78,12 @@ function addEvent() {
 function addStaff() {
     var staffName = $('#new-staff').val();
     if (staffName) {
-        if (!usedStaff[staffName]) {
+        if (usedStaff.indexOf(staffName) == -1) {
             var newElement = '<option value="'+staffName+'">'+staffName+'</option>';
             $('#staff-manager-list').append(newElement);
             $('#staff-name').append(newElement);
-            usedStaff[staffName] = true;
+            usedStaff.push(staffName);
+            saveStaffNames(usedStaff);
         }
         $('#new-staff').val('');
         $('#staff-manager-list').val(staffName);
