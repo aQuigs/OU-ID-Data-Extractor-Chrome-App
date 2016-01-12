@@ -45,5 +45,14 @@ document.addEventListener('DOMContentLoaded', function() {
         cd('/ouid').read(EVENT_CSV, function(done, fileContent) {
             fileContent.split('\n').forEach(addEventByName);
         }, function(){});
+
+        cd('/ouid').read(SWIPES_CSV, function(done, fileContent) {
+            fileContent.split('\n').forEach(function(record) {
+                var recordData = record.split(',');
+                if (recordData.length == 4) {
+                    addRecordByData(recordData[0], recordData[1], recordData[2], recordData[3]);
+                }
+            });
+        }, function(){});
     });
 });

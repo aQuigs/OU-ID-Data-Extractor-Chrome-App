@@ -27,6 +27,20 @@ function getDateFormatted() {
     return month + "/" + day + "/" + date.getFullYear() + " " +  hours+ ":" + minutes+ ":" + seconds + " " + ampm;
 }
 
+function addRecordByData(gnum, date, eventName, staffName) {
+    dt.row.add([
+        gnum,
+        getDateFormatted(),
+        eventName,
+        staffName
+    ]).draw(false);
+    if (usedRecordsByGID[gnum]) {
+        usedRecordsByGID[gnum].push(eventName);
+    } else {
+        usedRecordsByGID[gnum] = [eventName];
+    }
+}
+
 function addRecord() {
     if (dt) {
         var gnum = $('#gnumber').val();
@@ -35,17 +49,7 @@ function addRecord() {
 
         if (gnum && eventName && staffName) {
             if (!usedRecordsByGID[gnum] || usedRecordsByGID[gnum].indexOf(eventName) == -1) {
-                dt.row.add([
-                    gnum,
-                    getDateFormatted(),
-                    eventName,
-                    staffName
-                ]).draw(false);
-                if (usedRecordsByGID[gnum]) {
-                    usedRecordsByGID[gnum].push(eventName);
-                } else {
-                    usedRecordsByGID[gnum] = [eventName];
-                }
+                addRecordByData(gnum, getDateFormatted(), eventName, staffName);
                 saveSwipes();
             }
             $('#gnumber').val('');
@@ -69,8 +73,6 @@ function addEventByName(eventName) {
         $('#event-name').append(newElement);
         usedEvents.push(eventName);
     }
-    $('#new-event').val('');
-    $('#event-manager-list').val(eventName);
 }
 
 function addEvent() {
@@ -79,6 +81,8 @@ function addEvent() {
         addEventByName(eventName);
         saveEventNames(usedEvents);
     }
+    $('#new-event').val('');
+    $('#event-manager-list').val(eventName);
 }
 
 function addStaffByName(staffName) {
@@ -88,8 +92,6 @@ function addStaffByName(staffName) {
         $('#staff-name').append(newElement);
         usedStaff.push(staffName);
     }
-    $('#new-staff').val('');
-    $('#staff-manager-list').val(staffName);
 }
 
 function addStaff() {
@@ -98,6 +100,8 @@ function addStaff() {
         addStaffByName(staffName);
         saveStaffNames(usedStaff);
     }
+    $('#new-staff').val('');
+    $('#staff-manager-list').val(staffName);
 }
 
 function onEnter(id, callback) {
