@@ -27,12 +27,24 @@ function getDateFormatted() {
     return month + "/" + day + "/" + date.getFullYear() + " " +  hours+ ":" + minutes+ ":" + seconds + " " + ampm;
 }
 
+function setupCheckboxListeners() {
+    $('.delete-checkbox').unbind('change');
+    $('.delete-checkbox').on('change', function() {
+        if ($('#data-table :checked').length) {
+            $('#delete-selected').prop("disabled", false);
+        } else {
+            $('#delete-selected').prop("disabled", true);
+        }
+    });
+}
+
 function addRecordByData(gnum, date, eventName, staffName) {
     dt.row.add([
         gnum,
         getDateFormatted(),
         eventName,
-        staffName
+        staffName,
+        '<input type="checkbox" class="delete-checkbox">'
     ]).draw(false);
     if (usedRecordsByGID[gnum]) {
         usedRecordsByGID[gnum].push(eventName);
@@ -40,6 +52,8 @@ function addRecordByData(gnum, date, eventName, staffName) {
         usedRecordsByGID[gnum] = [eventName];
     }
     adjustColumnSize();
+    $('#download-swipe-btn').prop("disabled", false);
+    setupCheckboxListeners();
 }
 
 function addRecord() {
@@ -141,6 +155,8 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#gnumber').val('');
         $('#event-error').css('visibility', 'hidden');
         $('#staff-error').css('visibility', 'hidden');
+        $('#data-table :checked').attr('checked', false);
+        $('#delete-selected').prop("disabled", true);
         $('#ui-tracker').show();
 
         // fix to accomodate for lack of resizing table headers when display: none;
@@ -229,6 +245,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             deleteSwipeData();
                             usedRecordsByGID = {};
                             dt.clear().draw();
+                            $('#download-swipe-btn').prop("disabled", true);
+                            $('#delete-selected').prop("disabled", true);
                         }
                         // truncate to prevent leaving residual content when overwriting a larger file than the csv data
                         e.currentTarget.truncate(e.currentTarget.position);
@@ -237,6 +255,28 @@ document.addEventListener('DOMContentLoaded', function() {
                     fileWriter.write(blob);
                 });
             });
+        }
+    });
+
+    $('#delete-selected').on('click', function() {
+        var rows = $('#data-table :checked').parent().parent()
+        rows.toArray().forEach(function(r) {
+            var children = r.children;
+            var gnum = $(children[0]).text();
+            var eventName = $(children[2]).text();
+            var eventsForGnum = usedRecordsByGID[gnum];
+            if (eventsForGnum.length == 1 && eventsForGnum[0] == eventName) {
+                delete usedRecordsByGID[gnum];
+            } else {
+                usedRecordsByGID[gnum].splice(eventsForGnum.indexOf(eventName), 1);
+            }
+        });
+
+        dt.rows(rows).remove().draw()
+        saveSwipes();
+        $('#delete-selected').prop("disabled", true);
+        if ($.isEmptyObject(usedRecordsByGID)) {
+            $('#download-swipe-btn').prop("disabled", true);
         }
     });
 });

@@ -23,7 +23,7 @@ function getSwipeCSVData() {
     return $('#data-table tbody tr').map(function() {
         return $(this.children).map(function() {
             return $(this).text()
-        }).get().join(',')
+        }).get().splice(0,4).join(',') // splice to ignore checkbox column
     }).get().join('\n');
 }
 

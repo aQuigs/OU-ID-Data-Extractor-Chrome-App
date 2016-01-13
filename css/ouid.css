@@ -29,8 +29,9 @@
     visibility: hidden;
 }
 
-.data-table  th {
-    width: 100%;
+td:nth-child(5)
+{
+	text-align:center;
 }
 
 #ui-event, #ui-staff, #ui-tracker, #back-button {
