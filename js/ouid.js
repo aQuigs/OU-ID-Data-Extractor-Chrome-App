@@ -201,4 +201,29 @@ document.addEventListener('DOMContentLoaded', function() {
             selector.val('');
         }
     });
+
+    $('#download-swipe-btn').on('click', function() {
+        if (usedRecordsByGID.length) {
+                chrome.fileSystem.chooseEntry( {
+                type: 'saveFile',
+                suggestedName: SWIPES_CSV,
+                accepts: [ { extensions: ['csv']} ],
+                acceptsAllTypes: true
+            }, function (fileEntry) { 
+                fileEntry.createWriter(function(fileWriter) {
+
+                    var truncated = false;
+                    var blob = new Blob([getSwipeCSVData()]);
+
+                    fileWriter.onwriteend = function(e) {
+                        deleteSwipeData();
+                        usedRecordsByGID = {};
+                        dt.clear().draw();
+                    };
+
+                    fileWriter.write(blob);
+                });
+            });
+        }
+    });
 });

@@ -38,6 +38,10 @@ function saveSwipes() {
     }
 }
 
+function deleteSwipeData() {
+    cd(DIRNAME).rmrf(SWIPES_CSV);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     cd(function() {
         cd().mkdir(DIRNAME);
@@ -58,27 +62,5 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }, function(){});
-
-        $('#download-swipe-btn').on('click', function() {
-                chrome.fileSystem.chooseEntry( {
-                type: 'saveFile',
-                suggestedName: SWIPES_CSV,
-                accepts: [ { extensions: ['txt']} ],
-                acceptsAllTypes: true
-            }, function (fileEntry) { 
-                // $('#download-swipe-btn').prop("disabled",true);
-                fileEntry.createWriter(function(fileWriter) {
-
-                    var truncated = false;
-                    var blob = new Blob([getSwipeCSVData()]);
-
-                    fileWriter.onwriteend = function(e) {
-                        // $('#download-swipe-btn').prop("disabled",false);
-                    };
-
-                    fileWriter.write(blob);
-                });
-            });
-        });
     });
 });
