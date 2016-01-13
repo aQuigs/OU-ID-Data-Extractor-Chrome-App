@@ -49,6 +49,16 @@ function addRecord() {
         var staffName = $('#staff-name').val();
 
         if (gnum && eventName && staffName) {
+
+            // Only allow numerical or G####### style inputs
+            if (isNaN(gnum)) {
+                if (gnum[0].toLowerCase() == 'g' && !isNaN(gnum.substring(1))) {
+                    gnum = gnum.substring(1);
+                } else {
+                    return;
+                }
+            }
+
             if (!usedRecordsByGID[gnum] || usedRecordsByGID[gnum].indexOf(eventName) == -1) {
                 addRecordByData(gnum, getDateFormatted(), eventName, staffName);
                 saveSwipes();
@@ -156,7 +166,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     $('#event-name').on('change', function() {
-            console.log($('#event-name').val());
         if ($('#event-name').val()) {
             $('#event-error').css('visibility', 'hidden');
         }
