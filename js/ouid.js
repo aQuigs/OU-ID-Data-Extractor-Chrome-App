@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     $('#download-swipe-btn').on('click', function() {
-        if (usedRecordsByGID.length) {
+        if (!$.isEmptyObject(usedRecordsByGID)) {
                 chrome.fileSystem.chooseEntry( {
                 type: 'saveFile',
                 suggestedName: SWIPES_CSV,
@@ -212,13 +212,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }, function (fileEntry) { 
                 fileEntry.createWriter(function(fileWriter) {
 
-                    var truncated = false;
                     var blob = new Blob([getSwipeCSVData()]);
 
                     fileWriter.onwriteend = function(e) {
-                        deleteSwipeData();
-                        usedRecordsByGID = {};
-                        dt.clear().draw();
+                        // truncate will cause a call to onwriteend, so without adjusting this there will be an infinite loop
+                        fileWriter.onwriteend = function() {
+                            deleteSwipeData();
+                            usedRecordsByGID = {};
+                            dt.clear().draw();
+                        }
+                        // truncate to prevent leaving residual content when overwriting a larger file than the csv data
+                        e.currentTarget.truncate(e.currentTarget.position);
                     };
 
                     fileWriter.write(blob);

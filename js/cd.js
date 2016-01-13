@@ -557,7 +557,7 @@ CD.prototype = {
   _wrap: function(fn) {
     var me = this;
     return function() {
-      console.log('wrapped',arguments);
+      // console.log('wrapped',arguments);
       fn.apply(me,arguments);
     }
   }
