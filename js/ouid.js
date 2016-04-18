@@ -158,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#data-table :checked').attr('checked', false);
         $('#delete-selected').prop("disabled", true);
         $('#ui-tracker').show();
+        $('#gnumber').focus();
 
         // fix to accomodate for lack of resizing table headers when display: none;
         adjustColumnSize();
@@ -170,6 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#staff-manager-list').val('');
         $('#new-staff').val('');
         $('#ui-staff').show();
+        $('#new-staff').focus();
     });
     
     $('#event-button').on('click', function() {
@@ -179,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#event-manager-list').val('');
         $('#new-event').val('');
         $('#ui-event').show();
+        $('#new-eventc').focus();
     });
 
     $('#event-name').on('change', function() {
