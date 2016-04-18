@@ -1,4 +1,5 @@
 var dt;
+var clearGNumTimeoutID;
 // for duplicate-avoiding purposes and saving without jquery HTML parsing
 var usedEvents = [];
 var usedStaff = [];
@@ -58,6 +59,7 @@ function addRecordByData(gnum, date, eventName, staffName) {
 
 function addRecord() {
     if (dt) {
+        cancelClearGNum();
         var gnum = $('#gnumber').val();
         var eventName = $('#event-name').val();
         var staffName = $('#staff-name').val();
@@ -137,6 +139,14 @@ function onEnter(id, callback) {
     });
 }
 
+function clearGNum() {
+    $('#gnumber').val('');
+}
+
+function cancelClearGNum() {
+    window.clearTimeout(clearGNumTimeoutID);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 
     onEnter('#gnumber', addRecord);
@@ -197,6 +207,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         $('#gnumber').focus();
     });
+
+    $('#gnumber').on('input', function() {
+        cancelClearGNum();
+        clearGNumTimeoutID = window.setTimeout(clearGNum, 5000)
+    });
+
+    $('#gnumber').on('change', cancelClearGNum);
 
     dt = $('#data-table').DataTable({
         "scrollY":        "200px",
