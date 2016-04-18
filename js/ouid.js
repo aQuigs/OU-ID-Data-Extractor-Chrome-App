@@ -201,7 +201,8 @@ document.addEventListener('DOMContentLoaded', function() {
     dt = $('#data-table').DataTable({
         "scrollY":        "200px",
         "scrollCollapse": true,
-        "paging":         false
+        "paging":         false,
+        "order":          [[1, "desc"]]
     });
 
     $('#delete-staff-btn').on('click', function() {
